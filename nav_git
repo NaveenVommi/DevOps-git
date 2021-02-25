@@ -1,1 +1,133 @@
-Naveen
+Venkatesh Pantla
+Ravi Kumar Bora
+Rakesh Kumar Potupureddy
+Naveen Vommi
+
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <link rel="stylesheet" href="jquery-ui.css">
+    <script src="jquery.js"></script>
+    <script src="jquery-ui.js"></script>
+    <style>
+
+        #container {
+          
+          width: 700px;
+          height: 450px;
+          margin: 70px auto;
+          border: 2px solid #f9bd01;
+      }
+        h2 {
+          color: #363636;
+          text-align: center;
+      }
+        #projects {
+          
+          width: 650px;
+          height: 250px;
+          margin: 0px auto;
+      }
+        ol li {
+          
+          border: 1px dotted #aaaaaa;
+          cursor: pointer;
+          padding: 5px;
+          margin-bottom: 5px;
+          
+      }
+        ol li:hover {
+          
+          background: #79b7e7;
+          
+      }
+        #BtnAddProject {
+          
+          margin-left: 540px;
+          margin-bottom: 20px;
+          
+      } 
+
+</style>
+    
+    <script>
+    
+    jQuery(document).ready(function(){
+    
+        $("#projects").tabs();
+          $("ul").sortable({axis:"x", containment:"#projects"});
+          $("ol").sortable({axis:"y", containment:"#projects"});
+          $("#BtnAddProject").button().click(function(){
+              $("#project_dialog").dialog({width: 400, resizable: false, modal: true, buttons:{
+                        
+             "Add new project":function(){
+                                         
+      var ProjectName = $("#new_project").val(); 
+                 
+      $("<li><a href='#" + ProjectName + "'>" + ProjectName + "</a></li>")
+         
+          .appendTo("#main");
+                 
+          $("<ol id='" + ProjectName + "'></ol>").appendTo("#projects");     
+                 
+            $("#projects").tabs("refresh");
+          
+          var TabCount = $("#projects .ui-tabs-nav li").length;
+                 
+        $("#projects").tabs("option", "active", TabCount-1);
+                 
+            $("#new_project").val("");
+                
+             $(this).dialog("close");       
+        
+             },
+           
+                  "Cancel":function(){
+                                         
+           $("#new_project").val("");
+                
+             $(this).dialog("close");
+            
+        }
+
+          }});
+              
+          });
+});
+    </script>
+</head>
+
+<body>
+    <div id="container">
+        <h2>To Do List</h2>
+        <button id="BtnAddProject">Add Project</button>
+<div id="projects">
+ <ul id="main">
+<li><a href="#personal">Personal</a></li>
+<li><a href="#work">Work</a></li>
+</ul>
+<ol id="personal">
+ <li><input type="checkbox">Pay School Fee</li>
+<li><input type="checkbox">Doctor Appointment</li>
+<li><input type="checkbox">Call the Plumber</li>
+</ol>
+<ol id="work">
+ <li><input type="checkbox">Complete Test Case Document</li>
+ <li><input type="checkbox">Meet Project Manager</li>
+ <li><input type="checkbox">Do the Project</li>
+</ol>
+</div>
+
+<div id="project_dialog" title="Add a Project" style="display: none";>
+ <label for="new_project">Project Name:</label><input id="new_project" type="text">
+</div>
+
+
+    </div>
+
+</body>
+</html>
+
